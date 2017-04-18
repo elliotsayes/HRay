@@ -8,6 +8,7 @@
 	==========================================================================
 
 > module HRayMath where
+> import Prelude hiding ((*>))
 
 
         representation of a point in a 2D-space

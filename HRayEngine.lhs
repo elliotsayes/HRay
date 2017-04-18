@@ -9,7 +9,8 @@
 > module HRayEngine (Resolution, Color, Diff(Solid,Perlin), Texture(Texture), TexturedObject, 
 >		     Light(AmbientLight,PointLight), Scene(Scene), Camera(Camera), rayTrace) where
 
-> import Maybe
+> import Data.Maybe
+> import Prelude hiding ((*>),(<*>))
 > import HRayMath
 
 

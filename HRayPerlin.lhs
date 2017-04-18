@@ -10,6 +10,7 @@
 
 > import HRayMath (Point3D, Vector, (<+>), (*>), clip)
 > import HRayEngine (Color)
+> import Prelude hiding ((*>))
 
         determines the noise value at a certain intersection point
 

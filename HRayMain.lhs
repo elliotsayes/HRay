@@ -8,8 +8,8 @@
 
 > import HRayOutput (getRenderTime, createPPM, getImage)
 > import HRayParser (RenderDescr(RenderDescr), readDescr)
-> import Directory (doesFileExist)
-> import System (getArgs)
+> import System.Directory (doesFileExist)
+> import System.Environment (getArgs)
 > import System.CPUTime (getCPUTime)
 
         main function

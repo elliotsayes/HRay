@@ -13,7 +13,7 @@ import HRayEngine (Scene(Scene), Texture(Texture), Diff(Solid,Perlin), TexturedO
 import HRayPerlin (perlinSolid, perlinSemiTurbulence,perlinTurbulence,perlinFire,perlinPlasma,perlinMarble,
 		   perlinMarbleBase,perlinWood)
 import HRayMath (Dimension, Resolution, Object(Sphere,Plane))
-import Char (isSpace, isAlpha, isDigit)
+import Data.Char (isSpace, isAlpha, isDigit)
 
 
 -- representation of a full description of scene which should be rendered
@@ -1174,6 +1174,13 @@ happyError_ tk tks = happyError' (tk:tks)
 newtype HappyIdentity a = HappyIdentity a
 happyIdentity = HappyIdentity
 happyRunIdentity (HappyIdentity a) = a
+
+instance Functor HappyIdentity where
+    fmap f (HappyIdentity a) = HappyIdentity $ f a
+
+instance Applicative HappyIdentity where
+    pure = HappyIdentity
+    (<*>) (HappyIdentity f) = fmap f
 
 instance Monad HappyIdentity where
     return = HappyIdentity
