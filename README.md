@@ -5,6 +5,6 @@ Modification of the HRay software originally found at [http://kejo.be/ELIS/Haske
 Usage: see [readme.txt](readme.txt)
 
 Changes:
-- Updated to work with GHC 8.0.2
+- Updated to work with GHC 8.0.2 (see [commit](https://github.com/elliotsayes/HRay/commit/a505be3a66e1250daa82e8a58a4988a429457bc1))
 
 Tested on windows. Only command line interface mode is tested.
