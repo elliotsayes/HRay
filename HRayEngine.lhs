@@ -6,7 +6,7 @@
 
 	==========================================================================
 
-> module HRayEngine (Resolution, Color, Diff(Solid,Perlin), Texture(Texture), TexturedObject, 
+> module HRayEngine (Resolution, Color, Diff(Solid,Perlin), Texture(Texture), TexturedObject,
 >		     Light(AmbientLight,PointLight), Scene(Scene), Camera(Camera), rayTrace) where
 
 > import Data.Maybe
@@ -70,7 +70,7 @@
 
 	determines the color at the intersection point
 	- if the texture has a solid color, this color is returned
-	- if the texture has a noise function to determine the color, 
+	- if the texture has a noise function to determine the color,
 	  this function is used to determine the color for the given point
 
 > colorAt :: (Maybe Intersection) -> Color
@@ -104,7 +104,7 @@
 
 > closestInt :: Ray -> (Maybe Intersection) -> TexturedObject -> (Maybe Intersection)
 
-> closestInt r i (o,m) = if d > 10**(-6) && ((isNothing i) || d < (intDist i)) 
+> closestInt r i (o,m) = if d > 10**(-6) && ((isNothing i) || d < (intDist i))
 >				then Just (Intersection d r (o,m))
 >				else i
 >    where
@@ -128,41 +128,41 @@
 > spec i d (PointLight pos int) = int *> (reflCoef * ( ((normalAt i) *. h)**(fromIntegral specCoef) ))
 >   where
 >       h  				  = norm ((d *> (-1)) <+> (mkNormVect (intPt i) pos))
->	(Texture _ reflCoef specCoef _ _) = intText i  
+>	(Texture _ reflCoef specCoef _ _) = intText i
 
-        shades the intersection point 
+        shades the intersection point
 
-> shadePt :: Intersection -> Vector -> [TexturedObject] -> Light -> Color 
+> shadePt :: Intersection -> Vector -> [TexturedObject] -> Light -> Color
 
-		if there is an ambient light in the scene (always in front of the list), then use it 
+		if there is an ambient light in the scene (always in front of the list), then use it
 
 > shadePt i d o (AmbientLight int) = int
 
 		illuminate an intersection point with a point light
 
 > shadePt i d o l@(PointLight pos int)
->	-- distance between light point and an object is smaller than distance between light point and shaded intersection 
->       -- => shadow -> no color factor added by this light source 
+>	-- distance between light point and an object is smaller than distance between light point and shaded intersection
+>       -- => shadow -> no color factor added by this light source
 >	| s         = (0.0,0.0,0.0)
->	-- no shadow -> color factor added by this light source 
+>	-- no shadow -> color factor added by this light source
 >	| otherwise = (diff (Just i) l) <+> (spec (Just i) d l)
->	where 
->		s     = not (isNothing i_s) && (intDist i_s) <= dist (intPt (Just i)) pos 
->           	i_s = intersect (mkRay (intPt (Just i)) pos) o 
+>	where
+>		s     = not (isNothing i_s) && (intDist i_s) <= dist (intPt (Just i)) pos
+>           	i_s = intersect (mkRay (intPt (Just i)) pos) o
 
-        calculates the reflected component at the given intersection point 
+        calculates the reflected component at the given intersection point
 
-> reflectPt :: Int -> Intersection -> Vector -> [TexturedObject] -> [Light] -> Color 
-> reflectPt depth i d = colorPt depth (Ray (intPt (Just i)) (reflectDir d (normalAt (Just i)))) (0.0,0.0,0.0) 
- 
+> reflectPt :: Int -> Intersection -> Vector -> [TexturedObject] -> [Light] -> Color
+> reflectPt depth i d = colorPt depth (Ray (intPt (Just i)) (reflectDir d (normalAt (Just i)))) (0.0,0.0,0.0)
+
         calculates the refracted component at the given intersection point
 
-> refractPt :: Int -> Intersection -> Vector -> Color -> [TexturedObject] -> [Light] -> Color  
-> refractPt depth i d b = if refractedDir == (0.0,0.0,0.0) then (\x y -> (0.0,0.0,0.0))  
->							   else colorPt depth (Ray (intPt (Just i)) refractedDir) (b *> refrCoef) 
->   where 
->	refractedDir                       = refractDir d (normalAt (Just i)) refrIndex  
->	(Texture _ _ _ refrCoef refrIndex) = intText (Just i)  
+> refractPt :: Int -> Intersection -> Vector -> Color -> [TexturedObject] -> [Light] -> Color
+> refractPt depth i d b = if refractedDir == (0.0,0.0,0.0) then (\x y -> (0.0,0.0,0.0))
+>							   else colorPt depth (Ray (intPt (Just i)) refractedDir) (b *> refrCoef)
+>   where
+>	refractedDir                       = refractDir d (normalAt (Just i)) refrIndex
+>	(Texture _ _ _ refrCoef refrIndex) = intText (Just i)
 
 
         determines the color at the given point of the view plane
@@ -171,24 +171,24 @@
 
 		when the maximum depth is reached, recursion stops
 
-> colorPt (-1) _ _ _ _ = (0.0, 0.0, 0.0) 
+> colorPt (-1) _ _ _ _ = (0.0, 0.0, 0.0)
 
 > colorPt d r@(Ray _ dir) b o l = if (isNothing i) then b else clip $ shadeColor <+> reflectColor <+> refractColor
->   where 
+>   where
 >       shadeColor   = foldl (<+>) (0.0,0.0,0.0) (map (shadePt (fromJust i) dir o) l)
->       reflectColor = if (reflCoef == 0.0) then (0.0, 0.0, 0.0) 
->                                          else (reflectPt (d-1) (fromJust i) dir o l) *> reflCoef 
->       refractColor = if (refrCoef == 0.0) then (0.0, 0.0, 0.0) 
->                                          else (refractPt (d-1) (fromJust i) dir b o l) *> refrCoef 
->       i = intersect r o 
->	(Texture _ reflCoef _ refrCoef _) = intText i 
+>       reflectColor = if (reflCoef == 0.0) then (0.0, 0.0, 0.0)
+>                                          else (reflectPt (d-1) (fromJust i) dir o l) *> reflCoef
+>       refractColor = if (refrCoef == 0.0) then (0.0, 0.0, 0.0)
+>                                          else (refractPt (d-1) (fromJust i) dir b o l) *> refrCoef
+>       i = intersect r o
+>	(Texture _ reflCoef _ refrCoef _) = intText i
 
-	determines the color of one ray through a given point 
+	determines the color of one ray through a given point
 
-> rayTracePt :: Int -> Scene -> Point3D -> Color 
-> rayTracePt d (Scene (Camera eye _) b o l) p = colorPt d (Ray p (mkNormVect eye p)) b o l 
+> rayTracePt :: Int -> Scene -> Point3D -> Color
+> rayTracePt d (Scene (Camera eye _) b o l) p = colorPt d (Ray p (mkNormVect eye p)) b o l
 
         raytraces the scene, and returns a list of colors representing the image
 
-> rayTrace :: Int -> Resolution -> Scene -> Image 
-> rayTrace d r s@(Scene (Camera _ dim) _ _ _) = (rayTracePt d s) . (mapToWin r dim) 
+> rayTrace :: Int -> Resolution -> Scene -> Image
+> rayTrace d r s@(Scene (Camera _ dim) _ _ _) = (rayTracePt d s) . (mapToWin r dim)

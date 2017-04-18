@@ -20,7 +20,7 @@
 >              then error "Usage: HRay <input scene path> <output ppm path>\n"
 >	       else do let input = head args
 >	                   output = head (tail args)
->                      exists <- doesFileExist input 
+>                      exists <- doesFileExist input
 >                      case exists of
 >                           True -> do fileContent <- readFile input
 >                                      let (RenderDescr res depth scene) = readDescr fileContent

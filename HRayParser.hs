@@ -1,14 +1,14 @@
-{- 
-     module HRayParser, which contains a parser which allows to use files containing scene descriptions 
+{-
+     module HRayParser, which contains a parser which allows to use files containing scene descriptions
      intended for usage with the other modules in the HRay package
- 
+
      author: Kenneth Hoste, 2004-2005
      part of a masters thesis at the University of Ghent, Belgium
 -}
 
 module HRayParser (RenderDescr(RenderDescr), readDescr) where
 
-import HRayEngine (Scene(Scene), Texture(Texture), Diff(Solid,Perlin), TexturedObject, 
+import HRayEngine (Scene(Scene), Texture(Texture), Diff(Solid,Perlin), TexturedObject,
 		   Light(AmbientLight, PointLight), Camera(Camera))
 import HRayPerlin (perlinSolid, perlinSemiTurbulence,perlinTurbulence,perlinFire,perlinPlasma,perlinMarble,
 		   perlinMarbleBase,perlinWood)
@@ -919,7 +919,7 @@ happyReduction_11 ((HappyTerminal (TokenDouble happy_var_17)) `HappyStk`
 	_ `HappyStk`
 	happyRest)
 	 = HappyAbsSyn10
-		 (perlinFire (happy_var_3,happy_var_5,happy_var_7) (happy_var_10,happy_var_12,happy_var_14) 
+		 (perlinFire (happy_var_3,happy_var_5,happy_var_7) (happy_var_10,happy_var_12,happy_var_14)
 										            happy_var_16 happy_var_17
 	) `HappyStk` happyRest
 
@@ -929,7 +929,7 @@ happyReduction_12 (HappyTerminal (TokenDouble happy_var_2))
 	 =  HappyAbsSyn10
 		 (perlinPlasma happy_var_2
 	)
-happyReduction_12 _ _  = notHappyAtAll 
+happyReduction_12 _ _  = notHappyAtAll
 
 happyReduce_13 = happyReduce 18 10 happyReduction_13
 happyReduction_13 ((HappyTerminal (TokenDouble happy_var_18)) `HappyStk`
@@ -952,7 +952,7 @@ happyReduction_13 ((HappyTerminal (TokenDouble happy_var_18)) `HappyStk`
 	_ `HappyStk`
 	happyRest)
 	 = HappyAbsSyn10
-		 (perlinMarble (happy_var_3,happy_var_5,happy_var_7) happy_var_9 happy_var_10 
+		 (perlinMarble (happy_var_3,happy_var_5,happy_var_7) happy_var_9 happy_var_10
 										              (happy_var_12,happy_var_14,happy_var_16) happy_var_18
 	) `HappyStk` happyRest
 
@@ -984,9 +984,9 @@ happyReduction_14 ((HappyTerminal (TokenDouble happy_var_25)) `HappyStk`
 	_ `HappyStk`
 	happyRest)
 	 = HappyAbsSyn10
-		 (perlinMarbleBase (happy_var_3,happy_var_5,happy_var_7) 
-										                  (happy_var_10,happy_var_12,happy_var_14) 
-                                                                                                  happy_var_16 happy_var_17 
+		 (perlinMarbleBase (happy_var_3,happy_var_5,happy_var_7)
+										                  (happy_var_10,happy_var_12,happy_var_14)
+                                                                                                  happy_var_16 happy_var_17
 										                  (happy_var_19,happy_var_21,happy_var_23) happy_var_25
 	) `HappyStk` happyRest
 
@@ -1073,7 +1073,7 @@ happyReduction_21 (HappyAbsSyn13  happy_var_2)
 	 =  HappyAbsSyn14
 		 (happy_var_2 : happy_var_1
 	)
-happyReduction_21 _ _  = notHappyAtAll 
+happyReduction_21 _ _  = notHappyAtAll
 
 happyReduce_22 = happyReduce 17 15 happyReduction_22
 happyReduction_22 (_ `HappyStk`
@@ -1125,7 +1125,7 @@ happyReduction_25 (HappyAbsSyn15  happy_var_2)
 	 =  HappyAbsSyn16
 		 (happy_var_2 : happy_var_1
 	)
-happyReduction_25 _ _  = notHappyAtAll 
+happyReduction_25 _ _  = notHappyAtAll
 
 happyNewToken action sts stk [] =
 	action 50 50 (error "reading EOF!") (HappyState action) sts stk []
@@ -1243,7 +1243,7 @@ data Token
 
 lexer :: String -> [Token]
 lexer [] = []
-lexer (c:cs) 
+lexer (c:cs)
       | isSpace c = lexer cs
       | isAlpha c = lexVar (c:cs)
       | isDigit c = lexNum (c:cs) 1
@@ -1363,7 +1363,7 @@ happyParse start_state = happyNewToken start_state notHappyAtAll notHappyAtAll
 -- the stack in this case.
 happyAccept (1) tk st sts (_ `HappyStk` ans `HappyStk` _) =
 	happyReturn1 ans
-happyAccept j tk st sts (HappyStk ans _) = 
+happyAccept j tk st sts (HappyStk ans _) =
 	 (happyReturn1 ans)
 
 -----------------------------------------------------------------------------
@@ -1463,7 +1463,7 @@ happyGoto action j tk st = action j j tk (HappyState action)
 
 -- parse error if we are in recovery and we fail again
 happyFail  (1) tk old_st _ stk =
---	trace "failing" $ 
+--	trace "failing" $
     	happyError_ tk
 
 {-  We don't need state discarding for our restricted implementation of
@@ -1471,7 +1471,7 @@ happyFail  (1) tk old_st _ stk =
     for now --SDM
 
 -- discard a state
-happyFail  (1) tk old_st (((HappyState (action))):(sts)) 
+happyFail  (1) tk old_st (((HappyState (action))):(sts))
 						(saved_tok `HappyStk` _ `HappyStk` stk) =
 --	trace ("discarding state, depth " ++ show (length stk))  $
 	action (1) (1) tk (HappyState (action)) sts ((saved_tok`HappyStk`stk))
@@ -1497,7 +1497,7 @@ notHappyAtAll = error "Internal Happy error\n"
 
 
 -----------------------------------------------------------------------------
--- Seq-ing.  If the --strict flag is given, then Happy emits 
+-- Seq-ing.  If the --strict flag is given, then Happy emits
 --	happySeq = happyDoSeq
 -- otherwise it emits
 -- 	happySeq = happyDontSeq

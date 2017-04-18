@@ -40,7 +40,7 @@
 
 > data Ray = Ray Point3D Vector
 
-	function which constructs a ray given the start point and another point on the ray 
+	function which constructs a ray given the start point and another point on the ray
 
 > mkRay :: Point3D -> Point3D -> Ray
 > mkRay p1 p2 = Ray p1 (mkNormVect p1 p2)
@@ -88,8 +88,8 @@
         normalizes a vector
 
 > norm :: Vector -> Vector
-> norm v 
->	| len v < 10**(-9) = (0.0,0.0,0.0) 
+> norm v
+>	| len v < 10**(-9) = (0.0,0.0,0.0)
 >	| otherwise        = v *> (1/(len v))
 
         construct a 3D normalised vector, given two 3D points
@@ -102,7 +102,7 @@
 > dist :: Point3D -> Point3D -> Double
 > dist p0 p1 = sqrt ((p1 <-> p0) *. (p1 <-> p0))
 
-        function which clips a color to correct values 
+        function which clips a color to correct values
 	- negative rgb values are casted to 0.0 values
         - positive rgb values higher than 1.0 are casted to 1.0
 
@@ -111,7 +111,7 @@
 
         function which solves a quadratic equation (ax² + bx + c = 0)
 
-> solveq :: (Double,Double,Double) ->[Double] 
+> solveq :: (Double,Double,Double) ->[Double]
 > solveq (a,b,c)
 >     | (d < 0)   = []
 >     | (d > 0)   = [(- b - sqrt d)/(2*a), (- b + sqrt d)/(2*a)]
@@ -134,7 +134,7 @@
         	where (A,B,C) is the normal on the plane, and D the distance from the origin to the normal if (A,B,C) is normalized
 		when normal . dir = 0, the ray and plane are parallel, so there is no intersection
 
-> intRayWith (Ray start dir) (Plane (a,b,c,d)) = if (abs(part) < 10**(-9)) then []  
+> intRayWith (Ray start dir) (Plane (a,b,c,d)) = if (abs(part) < 10**(-9)) then []
 >                                                                              else [- (d + ((a,b,c) *. start) ) / part]
 >   where
 >	part = (a,b,c) *. dir

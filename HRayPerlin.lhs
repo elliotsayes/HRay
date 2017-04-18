@@ -30,9 +30,9 @@
 >
 >       (i,j) = (pList !! bx0, pList !! bx1)
 >
->       (b00,b10,b01,b11) = (pList !! mod (i+by0) 256, 
->			     pList !! mod (j+by0) 256, 
->			     pList !! mod (i+by1) 256, 
+>       (b00,b10,b01,b11) = (pList !! mod (i+by0) 256,
+>			     pList !! mod (j+by0) 256,
+>			     pList !! mod (i+by1) 256,
 >			     pList !! mod (j+by1) 256)
 >
 >       (t,sy,sz) = (s_curve rx0, s_curve ry0, s_curve rz0)
@@ -89,7 +89,7 @@
         perlin noise sum with solid base color
 
 > perlinSemiTurbulence :: Color -> Int ->  Double -> Point3D -> Color
-> perlinSemiTurbulence base freq gridS intPt = base *> (((semiTurbulence freq gridS intPt)+1)/2)        
+> perlinSemiTurbulence base freq gridS intPt = base *> (((semiTurbulence freq gridS intPt)+1)/2)
 
 
         absolute perlin noise sum with solid base color
