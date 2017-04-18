@@ -1,0 +1,20 @@
+renderDescr ( resolution (800,600) ) 2 [
+scene { camera (0.0,0.0,150.0) (100,75) } 
+      { background (0.8,0.8,0.8) } 
+      { objects (object ( sphere 150.0 (0.0,0.0,-500.0) ) 
+			( texture ( diff perlin ( perlinFire (1.0,0.5,0.5) (0.0,1.0,0.0) 10 64.0)) 0.0 200 0.0 0.0 ))
+		(object ( sphere 40.0 (-80.0,0.0,-380.0) ) 
+			( texture ( diff perlin (perlinPlasma 16.0)) 0.0 60 0.0 0.0 ))
+		(object ( sphere 30.0 (100.0,30.0,-350.0) ) 
+			( texture ( diff perlin (perlinMarble (0.0,0.5,0.5) 10 64.0 (0.4,0.0,0.0) 30.0)) 0.0 60 0.0 0.0 ))
+		(object ( sphere 20.0 (40.0,60.0,-300.0) )
+			( texture ( diff perlin (perlinSolid (0.0,0.9,0.0) 2.0)) 0.0 60 0.0 0.0 )) 
+		(object ( sphere 20.0 (-40.0,80.0,-300.0) ) 
+			( texture ( diff perlin (perlinMarbleBase (0.8,0.0,0.0) (0.3,0.3,0.0) 10 32.0 (0.4,0.0,0.0) 30.0)) 0.0 60 0.0 0.0 ))
+		(object ( sphere 30.0 (10.0,-40.0,-300.0) ) 
+			( texture ( diff perlin (perlinWood (0.51,0.33,0.03) 10 16.0 1.0 2.0)) 0.0 60 0.0 0.0 )) }
+
+      { lights  (pointLight (200.0,200.0,200.0) (0.7,0.7,0.7) ) 
+		(pointLight (-200.0,-100.0,200.0) (0.4,0.4,0.4) ) } ]
+
+   

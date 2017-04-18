@@ -1,0 +1,18 @@
+renderDescr ( resolution (400,300) ) 10 [
+scene { camera (0.0,0.0,300.0) (200,150) } 
+      { background (0.8,0.8,0.8) } 
+      { objects (object ( sphere 30.0 (105.0,75.0,-350.0) ) ( texture ( diff solid (1.0,0.0,0.0) ) 0.0 20 0.0 0.0 ))
+		(object ( sphere 30.0 (35.0,75.0,-350.0) ) ( texture ( diff solid (1.0,0.0,0.0) ) 0.0 20 0.0 0.0 ))
+		(object ( sphere 30.0 (-35.0,75.0,-350.0) ) ( texture ( diff solid (1.0,0.0,0.0) ) 0.0 20 0.0 0.0 ))
+		(object ( sphere 30.0 (-105.0,75.0,-350.0) ) ( texture ( diff solid (1.0,0.0,0.0) ) 0.0 20 0.0 0.0 ))
+		(object ( sphere 30.0 (105.0,0.0,-350.0) ) ( texture ( diff solid (1.0,0.0,0.0) ) 0.0 20 0.0 0.0 ))
+		(object ( sphere 30.0 (35.0,0.0,-350.0) ) ( texture ( diff solid (1.0,0.0,0.0) ) 0.0 20 0.0 0.0 ))
+		(object ( sphere 30.0 (-35.0,0.0,-350.0) ) ( texture ( diff solid (1.0,0.0,0.0) ) 0.0 20 0.0 0.0 ))
+		(object ( sphere 30.0 (-105.0,0.0,-350.0) ) ( texture ( diff solid (1.0,0.0,0.0) ) 0.0 20 0.0 0.0 ))
+		(object ( sphere 30.0 (105.0,-75.0,-350.0) ) ( texture ( diff solid (1.0,0.0,0.0) ) 0.0 20 0.0 0.0 ))
+		(object ( sphere 30.0 (35.0,-75.0,-350.0) ) ( texture ( diff solid (1.0,0.0,0.0) ) 0.0 20 0.0 0.0 ))
+		(object ( sphere 30.0 (-35.0,-75.0,-350.0) ) ( texture ( diff solid (1.0,0.0,0.0) ) 0.0 20 0.0 0.0 ))
+		(object ( sphere 30.0 (-105.0,-75.0,-350.0) ) ( texture ( diff solid (1.0,0.0,0.0) ) 0.0 20 0.0 0.0 ))
+		(object ( sphere 80.0 (0.0,0.0,-150.0) ) ( texture ( diff solid (0.0,0.0,1.0) ) 0.0 0 0.8 1.2 )) }
+      { lights (pointLight (-200.0,0.0,500.0) (0.7,0.7,0.7) ) 
+	       (pointLight (0.0,0.0,-250.0) (0.5,0.5,0.5) ) } ]

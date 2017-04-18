@@ -1,0 +1,10 @@
+renderDescr ( resolution (1024,783) ) 10 [
+scene { camera (0.0,0.0,-150.0) (100,75) } 
+      { background (0.8,0.8,0.8) } 
+      { objects (object ( plane (1.0,0.0,-1.0,200.0) ) ( texture ( diff solid (0.0,0.0,0.4) ) 0.3 60 0.0 0.0 ))
+		(object ( plane (-1.0,0.0,-1.0,200.0) ) ( texture ( diff solid (0.4,0.0,0.0) ) 0.8 30 0.0 0.0 ))
+                (object ( sphere 30.0 (-20.0,20.0,130.0) ) ( texture ( diff solid (1.0,0.7,0.0) ) 0.8 60 0.0 0.0 ))
+                (object ( sphere 15.0 (30.0,-10.0,100.0) ) ( texture ( diff solid (0.9,0.9,0.8) ) 0.6 20 0.0 0.0 )) 
+                (object ( sphere 5.0 (-5.0,-30.0,110.0) ) ( texture ( diff solid (0.0,0.8,0.0) ) 0.4 40 0.0 0.0 )) }
+      { lights (pointLight (30.0,0.0,-300.0) (0.5,0.5,0.5) )
+	       (pointLight (-30.0,0.0,-300.0) (0.5,0.5,0.5) ) } ]

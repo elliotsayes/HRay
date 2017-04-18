@@ -1,0 +1,10 @@
+renderDescr ( resolution (400,300) ) 2 [
+scene { camera (0.0,0.0,-150.0) (100,75) } 
+      { background (0.8,0.8,0.8) } 
+      { objects (object ( sphere 40.0 (20.0,20.0,100.0) ) 
+			( texture ( diff perlin (perlinSemiTurb (0.8,0.8,0.8) 10 8.0)) 0.0 0 0.0 0.0 )) 
+		(object ( sphere 25.0 (-40.0,-30.0,120.0) ) 
+			( texture ( diff perlin (perlinSemiTurb (1.0,1.0,1.0) 10 4.0)) 0.7 60 0.0 0.0 )) }
+      { lights (pointLight (0.0,0.0,-200.0) (1.0,1.0,1.0) ) } ]
+
+   

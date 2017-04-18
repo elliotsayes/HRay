@@ -1,0 +1,8 @@
+renderDescr ( resolution (800,600) ) 100 [
+scene { camera (0.0,0.0,300.0) (200,150) } 
+      { background (0.8,0.8,0.8) } 
+      { objects (object ( sphere 80.0 (60.0,60.0,-400.0) ) ( texture ( diff solid (0.0,1.0,0.0) ) 1.0 20 0.0 0.0 )) 
+		(object ( sphere 80.0 (10.0,-20.0,-200.0) ) ( texture ( diff solid (0.6,0.6,1.0) ) 0.0 20 0.8 1.3 )) }
+      { lights 	(pointLight (100.0,200.0,-300.0) (0.7,0.7,0.7) )
+	       	(pointLight (50.0,-200.0,-300.0) (0.7,0.7,0.7) )
+	       	(pointLight (-150.0,-100.0,300.0) (0.7,0.7,0.7) ) } ]
